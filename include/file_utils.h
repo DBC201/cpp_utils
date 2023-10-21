@@ -6,6 +6,14 @@
 #include <filesystem>
 #include <iostream>
 
+/*
+	std::fstream::in read
+	std::fstream::out write
+	std::fstream::app append
+	std::fstream::trunc truncate, force clear
+	std::fstream::in | std::fstream::app
+*/
+
 namespace cpp_utils::file_utils {
 	/**
 	* @param file_path path to file to be read
@@ -17,6 +25,7 @@ namespace cpp_utils::file_utils {
 		std::fstream file;
 		file.open(file_path, std::fstream::in);
 		if (!file.is_open()) {
+			// throw std::runtime_error("Unable to open " + file_path);
 			std::cerr << "Unable to open " + file_path << std::endl;
 			exit(EXIT_FAILURE);
 		}
@@ -35,6 +44,7 @@ namespace cpp_utils::file_utils {
 		std::fstream file;
 		file.open(file_path, std::fstream::in);
 		if (!file.is_open()) {
+			// throw std::runtime_error("Unable to open " + file_path);
 			std::cerr << "Unable to open " + file_path << std::endl;
 			exit(EXIT_FAILURE);
 		}
@@ -56,6 +66,7 @@ namespace cpp_utils::file_utils {
 		std::fstream file;
 		file.open(file_path, std::fstream::in);
 		if (!file.is_open()) {
+			// throw std::runtime_error("Unable to open " + file_path);
 			std::cerr << "Unable to open " + file_path << std::endl;
 			exit(EXIT_FAILURE);
 		}
