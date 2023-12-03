@@ -6,7 +6,7 @@
 namespace cpp_utils::coordinate_utils {
 	template <typename T>
 	std::vector<T> string_to_coordinate_vector(std::string str) {
-		return utils::string_utils::convert_string_vector<T>(utils::string_utils::split_by_string(str, ","));
+		return cpp_utils::string_utils::convert_string_vector<T>(cpp_utils::string_utils::split_by_string(str, ","));
 	}
 
 	template <typename T>
