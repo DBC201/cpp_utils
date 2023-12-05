@@ -119,6 +119,6 @@ namespace cpp_utils::reduction_utils {
 		possible_matches_t possible_matches;
 		possible_matches_t final_matches;
 	};
-} // utils::reduction_utils
+} // cpp_utils::reduction_utils
 
 #endif // REDUCTION_UTILS_H

@@ -29,6 +29,6 @@ namespace cpp_utils::regex_utils {
 			private:
 				std::regex r;
 	};
-} // utils::regex_utils
+} // cpp_utils::regex_utils
 
 #endif // REGEX_UTILS_H

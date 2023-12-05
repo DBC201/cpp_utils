@@ -26,7 +26,7 @@ namespace cpp_utils::command_utils {
 
 		return output;
 	}
-} // utils::command_utils
+} // cpp_utils::command_utils
 
 
 #endif // COMMAND_UTILS_H

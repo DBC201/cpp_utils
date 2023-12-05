@@ -82,6 +82,6 @@ namespace cpp_utils::string_utils {
 		}
 		return true;
 	}
-} // utils::string_utils
+} // cpp_utils::string_utils
 
 #endif // STRING_UTILS_H

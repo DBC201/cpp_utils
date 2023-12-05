@@ -34,6 +34,6 @@ namespace cpp_utils::coordinate_utils {
 		return str;
 	}
 
-} // utils::coordinate_utils
+} // cpp_utils::coordinate_utils
 
 #endif // COORDINATE_UTILS_H

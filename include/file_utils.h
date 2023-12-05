@@ -81,6 +81,6 @@ namespace cpp_utils::file_utils {
 		std::filesystem::path cwd = std::filesystem::current_path();
 		return cwd.string();
 	}
-} // utils::file_utils
+} // cpp_utils::file_utils
 
 #endif // FILE_UTILS_H

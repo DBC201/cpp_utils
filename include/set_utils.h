@@ -69,6 +69,6 @@ namespace cpp_utils::set_utils {
 	}
 
 
-} // utils::set_utils
+} // cpp_utils::set_utils
 
 #endif // SET_UTILS_H
