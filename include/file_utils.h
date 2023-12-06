@@ -18,7 +18,7 @@ namespace cpp_utils::file_utils {
 	/**
 	* @param file_path path to file to be read
 	* @param container the container data type to contain parsed lines
-	* @param lambda a lambda function that takes two arguments, line as string and container (container should be taken as reference)
+	* @param lambda a lambda function that takes two arguments, line as string and container (container is taken as reference)
 	*/
 	void process_lines(std::string file_path, auto& container, auto lambda) {
 		std::string line;
