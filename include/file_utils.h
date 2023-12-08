@@ -15,6 +15,53 @@
 */
 
 namespace cpp_utils::file_utils {
+	class FileUtils {
+	public:
+		FileUtils() = default;
+
+		FileUtils(std::string file_path) {
+			file.open(file_path, std::fstream::in);
+
+			if (!file.is_open()) {
+				throw std::runtime_error("Unable to open " + file_path);
+			}
+ 		}
+
+		FileUtils(std::string file_path, std::ios_base::openmode mode) {
+			file.open(file_path, mode);
+			if (!file.is_open()) {
+				throw std::runtime_error("Unable to open " + file_path);
+			}
+		}
+
+		std::string get_line() {
+			std::string line;
+			std::getline(file, line);
+			return line;
+		}
+
+		void open(std::string file_path) {
+			file.open(file_path, std::fstream::in);
+		}
+
+		void open(std::string file_path, std::ios_base::openmode mode) {
+			file.open(file_path, mode);
+		}
+
+		void process_lines(auto lambda) {
+			std::string line;
+			while (std::getline(file, line)) {
+				lambda(line);
+			}
+		}
+
+		void close() {
+			file.close();
+		}
+	private:
+		std::fstream file;
+	};
+
 	/**
 	* @param file_path path to file to be read
 	* @param container the container data type to contain parsed lines
