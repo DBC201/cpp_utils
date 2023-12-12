@@ -82,6 +82,36 @@ namespace cpp_utils::string_utils {
 		}
 		return true;
 	}
+
+	template <typename T>
+	std::vector<T> string_to_vector(std::string str) {
+		return convert_string_vector<T>(split_by_string(str, ","));
+	}
+
+	template <typename T>
+	std::string vector_to_string(std::vector<T> v) {
+		std::string str;
+		for (int i=0; i<v.size(); i++) {
+			str += std::to_string(v[i]);
+			if (i != v.size()-1) {
+				str += ",";
+			}
+		}
+
+		return str;
+	}
+
+	std::string vector_to_string(std::vector<std::string> v) {
+		std::string str;
+		for (int i=0; i<v.size(); i++) {
+			str += v[i];
+			if (i != v.size()-1) {
+				str += ",";
+			}
+		}
+
+		return str;
+	}
 } // cpp_utils::string_utils
 
 #endif // STRING_UTILS_H
