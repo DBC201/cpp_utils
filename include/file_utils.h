@@ -15,6 +15,13 @@
 */
 
 namespace cpp_utils::file_utils {
+	enum FileMode {
+		READ = std::fstream::in,
+		WRITE = std::fstream::out,
+		APPEND = std::fstream::app,
+		TRUNC = std::fstream::trunc
+	};
+
 	class FileUtils {
 	public:
 		FileUtils() = default;
@@ -27,7 +34,7 @@ namespace cpp_utils::file_utils {
 			}
  		}
 
-		FileUtils(std::string file_path, std::ios_base::openmode mode) {
+		FileUtils(std::string file_path, FileMode mode) {
 			file.open(file_path, mode);
 			if (!file.is_open()) {
 				throw std::runtime_error("Unable to open " + file_path);
@@ -44,7 +51,7 @@ namespace cpp_utils::file_utils {
 			file.open(file_path, std::fstream::in);
 		}
 
-		void open(std::string file_path, std::ios_base::openmode mode) {
+		void open(std::string file_path, FileMode mode) {
 			file.open(file_path, mode);
 		}
 
@@ -54,6 +61,10 @@ namespace cpp_utils::file_utils {
 				lambda(line);
 			}
 		}
+
+		void write(std::string str) {
+			file << str;
+		}	
 
 		void close() {
 			file.close();
