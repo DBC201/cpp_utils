@@ -12,6 +12,19 @@ namespace cpp_utils::vector_utils {
 		}
 	}
 
+	bool vector_equal(auto& a, auto& b) {
+		if (a.size() != b.size()) {
+			return false;
+		}
+
+		for (int i=0; i<a.size(); i++) {
+			if (a[i] != b[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 } // cpp_utils::vector_utils
 
 
