@@ -6,7 +6,54 @@
 #include <unordered_map>
 
 namespace cpp_utils::coordinate_utils {
-	template <typename T>
+	namespace two_dimensional {
+		enum direction_t {
+			NORTH,
+			EAST,
+			SOUTH,
+			WEST,
+			NUM_DIRECTIONS
+		};
+
+		direction_t flip_direction(direction_t direction, float degrees) {
+			int direction_change = round(degrees/(360/static_cast<float>(NUM_DIRECTIONS)));
+			direction_change %= NUM_DIRECTIONS;
+			if (direction_change < 0) {
+				direction_change += static_cast<int>(NUM_DIRECTIONS);
+			}
+
+			return static_cast<direction_t>((static_cast<int>(direction) + direction_change) % static_cast<int>(NUM_DIRECTIONS));
+		}
+
+		template <typename T = size_t>
+		bool in_bounds(std::vector<T> coordinate, size_t y_max, size_t x_max) {
+			return coordinate[1] >= 0 && coordinate[1] < y_max && coordinate[0] >= 0 && coordinate[0] < x_max;
+		}
+
+		template <typename T = size_t>
+		std::vector<T> move(std::vector<T> coordinate, direction_t direction) {
+			switch(direction) {
+			case NORTH:
+				coordinate[0]--;
+				break;
+			case WEST:
+				coordinate[1]--;
+				break;
+			case SOUTH:
+				coordinate[0]++;
+				break;
+			case EAST:
+				coordinate[1]++;
+				break;
+			default:
+				throw std::runtime_error("Invalid direction");
+				break;
+			}
+
+			return coordinate;
+		}
+	};
+	template <typename T = size_t>
 	class CoordinateCache {
 	public:
 		CoordinateCache() = default;
