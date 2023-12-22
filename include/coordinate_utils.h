@@ -26,8 +26,8 @@ namespace cpp_utils::coordinate_utils {
 		}
 
 		template <typename T = size_t>
-		bool in_bounds(std::vector<T> coordinate, size_t y_max, size_t x_max) {
-			return coordinate[1] >= 0 && coordinate[1] < y_max && coordinate[0] >= 0 && coordinate[0] < x_max;
+		bool in_bounds(std::vector<T> coordinate, T y_max, T x_max, T y_min=0, T x_min=0) {
+			return coordinate[0] >= y_min && coordinate[0] < y_max && coordinate[1] >= x_min && coordinate[1] < x_max;
 		}
 
 		template <typename T = size_t>
