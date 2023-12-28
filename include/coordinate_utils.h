@@ -31,19 +31,19 @@ namespace cpp_utils::coordinate_utils {
 		}
 
 		template <typename T = size_t>
-		std::vector<T> move(std::vector<T> coordinate, direction_t direction) {
+		std::vector<T> move(std::vector<T> coordinate, direction_t direction, T disposition=1) {
 			switch(direction) {
 			case NORTH:
-				coordinate[0]--;
+				coordinate[0] -= disposition;
 				break;
 			case WEST:
-				coordinate[1]--;
+				coordinate[1] -= disposition;
 				break;
 			case SOUTH:
-				coordinate[0]++;
+				coordinate[0] += disposition;
 				break;
 			case EAST:
-				coordinate[1]++;
+				coordinate[1] += disposition;
 				break;
 			default:
 				throw std::runtime_error("Invalid direction");

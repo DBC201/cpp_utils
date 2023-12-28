@@ -66,6 +66,13 @@ namespace cpp_utils::string_utils {
 	}
 
 	template <typename T>
+	T convert_hexadecimal(std::string str) {
+		T val;
+		std::istringstream(str) >> std::hex >> val;
+		return val;
+	}
+
+	template <typename T>
 	std::vector<T> convert_string_vector(std::vector<std::string> v) {
 		std::vector<T> ret(v.size());
 		for (int i = 0; i < ret.size(); i++) {
