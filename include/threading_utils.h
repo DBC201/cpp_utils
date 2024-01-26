@@ -39,7 +39,7 @@ namespace cpp_utils::threading_utils {
 
 		void wait() {
 			std::unique_lock<std::mutex> lock(m);
-			taskDone.wait(lock, [&]{return running_task_count == 0 && q.empty();});
+			allWaiting.wait(lock, [&]{return running_task_count == 0 && q.empty();});
 		}
 
 		~ThreadPool() {
@@ -57,7 +57,7 @@ namespace cpp_utils::threading_utils {
 	private:
 		std::vector<std::thread> threads;
 		std::condition_variable newTask;
-		std::condition_variable taskDone;
+		std::condition_variable allWaiting;
 		std::queue<std::function<void()>> q;
 		uint16_t running_task_count = 0;
 		bool stop = false;
@@ -74,6 +74,11 @@ namespace cpp_utils::threading_utils {
 				std::function<void()> job;
 				{
 					std::unique_lock<std::mutex> lock(m);
+
+					if (stop) {
+						return;
+					}
+
 					newTask.wait(lock, [&]{return stop || !q.empty(); });
 
 					if (stop) {
@@ -91,7 +96,7 @@ namespace cpp_utils::threading_utils {
 				newTask.notify_one();
 				running_task_count--;
 				if (running_task_count == 0) {
-					taskDone.notify_all();
+					allWaiting.notify_all();
 				}
 				m.unlock();
 			}
