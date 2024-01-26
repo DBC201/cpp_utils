@@ -70,10 +70,18 @@ namespace cpp_utils::threading_utils {
 		}
 
 		void worker() {
+			bool first_run = true;
 			while (true) {
 				std::function<void()> job;
 				{
 					std::unique_lock<std::mutex> lock(m);
+
+					if (!first_run) {
+						running_task_count--;
+						if (running_task_count == 0 && q.empty()) {
+							allWaiting.notify_all();
+						}
+					}
 
 					if (stop) {
 						return;
@@ -88,17 +96,15 @@ namespace cpp_utils::threading_utils {
 					job = std::move(q.front());
 					q.pop();
 					running_task_count++;
+					if (!first_run && !q.empty() && running_task_count < thread_count) {
+						newTask.notify_one();
+					}
+					else {
+						first_run = false;
+					}
 				}
 
 				job();
-				
-				m.lock();
-				newTask.notify_one();
-				running_task_count--;
-				if (running_task_count == 0) {
-					allWaiting.notify_all();
-				}
-				m.unlock();
 			}
 		}
 	};
