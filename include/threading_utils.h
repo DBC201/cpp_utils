@@ -92,7 +92,12 @@ namespace cpp_utils::threading_utils {
 					job = std::move(q.front());
 					q.pop();
 					running_task_count++;
-					first_run = false;
+					if (!first_run && !q.empty() && running_task_count < thread_count) {
+						newTask.notify_one();
+					}
+					else {
+						first_run = false;
+					}
 				}
 
 				job();
