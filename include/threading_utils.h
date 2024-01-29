@@ -17,7 +17,7 @@ namespace cpp_utils::threading_utils {
 			initThreads();
 		}
 
-		ThreadPool(int thread_count) {
+		ThreadPool(uint8_t thread_count) {
 			this->thread_count = thread_count;
 			initThreads();
 		}
@@ -83,10 +83,6 @@ namespace cpp_utils::threading_utils {
 						}
 					}
 
-					if (stop) {
-						return;
-					}
-
 					newTask.wait(lock, [&]{return stop || !q.empty(); });
 
 					if (stop) {
@@ -96,12 +92,7 @@ namespace cpp_utils::threading_utils {
 					job = std::move(q.front());
 					q.pop();
 					running_task_count++;
-					if (!first_run && !q.empty() && running_task_count < thread_count) {
-						newTask.notify_one();
-					}
-					else {
-						first_run = false;
-					}
+					first_run = false;
 				}
 
 				job();
