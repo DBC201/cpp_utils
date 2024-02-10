@@ -3,7 +3,6 @@
 
 #include <fstream>
 #include <vector>
-#include <filesystem>
 #include <iostream>
 
 /*
@@ -133,11 +132,6 @@ namespace cpp_utils::file_utils {
 		}
 		file.close();
 		return return_val;
-	}
-
-	std::string get_current_directory() {
-		std::filesystem::path cwd = std::filesystem::current_path();
-		return cwd.string();
 	}
 } // cpp_utils::file_utils
 
