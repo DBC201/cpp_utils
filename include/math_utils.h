@@ -57,4 +57,4 @@ namespace cpp_utils::math_utils {
 
 } // cpp_utils::math_utils
 
-#endif MATH_UTILS_H
+#endif // MATH_UTILS_H
