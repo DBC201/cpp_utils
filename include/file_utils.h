@@ -47,6 +47,10 @@ namespace cpp_utils::file_utils {
 			return line;
 		}
 
+		bool is_open() {
+			return file.is_open();
+		}
+
 		void open(std::string file_path) {
 			file.open(file_path, std::fstream::in);
 		}
@@ -64,10 +68,18 @@ namespace cpp_utils::file_utils {
 
 		void write(std::string str) {
 			file << str;
-		}	
+		}
+
+		void write(const std::vector<uint8_t>& data) {
+			file.write(reinterpret_cast<const char*>(data.data()), data.size());
+		}
 
 		void close() {
 			file.close();
+		}
+
+		~FileUtils() {
+			close();
 		}
 	private:
 		std::fstream file;
