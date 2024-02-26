@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 #include <string>
+#include <iomanip>
 
 namespace cpp_utils::string_utils {
 	std::vector<std::string> split_by_string(std::string str, std::string delimeter) {
@@ -118,6 +119,13 @@ namespace cpp_utils::string_utils {
 		}
 
 		return str;
+	}
+
+	template <typename T>
+	std::string pad(T val, unsigned int zeros) {
+		std::ostringstream oss;
+		oss << std::setw(zeros) << std::setfill('0') << val;
+		return oss.str();
 	}
 } // cpp_utils::string_utils
 
